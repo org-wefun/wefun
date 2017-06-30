@@ -7,7 +7,9 @@ public enum CodeAndMsg {
 	SYSTEM_EXCEPTION(-1, "系统异常，稍后再试"), 
 	PARAM_NOT_NULL(1001, "参数不能为空"), 
 	INVALID_PARAM(1002, "无效的参数"), 
-	CANNOT_FIND_IN_DATABASE(1003, "数据库没有记录");
+	CANNOT_FIND_IN_DATABASE(1003, "数据库没有记录"),
+	INVALID_ACCOUNT(1004, "无效的账号"), 
+	PASSWORD_ACCOUNT_ERROR(1004, "账号或密码错误");
 
 	private String msg;
 	private int code;

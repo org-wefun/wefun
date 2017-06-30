@@ -1,5 +1,5 @@
 package wefun.dao.mysql;
 
-public class BaseDAO {
+public interface BaseDAO {
 
 }
