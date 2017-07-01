@@ -1,6 +1,9 @@
 package wefun.model.po;
 
-public class BasePO{
+import java.io.Serializable;
+
+public class BasePO implements Serializable{
+	private static final long serialVersionUID = 6983997227344758161L;
 	private Long updateTime;
 	private Long createTime;
 	public Long getUpdateTime() {
