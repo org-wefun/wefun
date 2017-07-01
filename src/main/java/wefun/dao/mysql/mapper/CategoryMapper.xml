@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wefun.dao.mysql.CategoryDAO">
+	<select id="getCategoryList" resultType="wefun.model.po.CategoryPO">
+		SELECT * FROM category
+	</select>
+
+	<select id="getCategoryListByParent" parameterType="java.lang.Integer"
+		resultType="wefun.model.po.CategoryPO">
+		SELECT * FROM category WHERE parentId = #{parentId}
+	</select>
+
+</mapper> 
