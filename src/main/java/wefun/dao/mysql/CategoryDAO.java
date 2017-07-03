@@ -6,8 +6,8 @@ import wefun.model.po.CategoryPO;
 
 public interface CategoryDAO {
 	
-	public List<CategoryPO> getCategoryList();
+	public List<CategoryPO> getCategoryList(CategoryPO categoryPO);
 	
-	public List<CategoryPO> getCategoryListByParent(Integer parentId);
+	Integer insert(CategoryPO categoryPO);
 
 }

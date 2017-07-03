@@ -1,21 +1,24 @@
 package wefun.model.po;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class BasePO implements Serializable{
 	private static final long serialVersionUID = 6983997227344758161L;
-	private Long updateTime;
-	private Long createTime;
-	public Long getUpdateTime() {
+	
+	private Date updateTime;
+	private Date createTime;
+	
+	public Date getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Long updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	public Long getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Long createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 	

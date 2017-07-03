@@ -12,6 +12,11 @@ public class CategoryPO extends BasePO{
 	private Integer level;
 	private Integer parentId;
 	private Integer order;
+	/**
+	 * @see wefun.commons.constant.CategoryType 
+	 */
+	private Integer type;
+	
 	
 	public Integer getOrder() {
 		return order;
@@ -42,6 +47,12 @@ public class CategoryPO extends BasePO{
 	}
 	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	
 

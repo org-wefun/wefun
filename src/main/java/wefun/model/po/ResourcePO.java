@@ -20,6 +20,8 @@ public class ResourcePO extends BasePO{
     //所属类容
     private Integer contentId;
     
+    private String desc;
+    
 	public Integer getId() {
 		return id;
 	}
@@ -55,6 +57,12 @@ public class ResourcePO extends BasePO{
 	}
 	public void setContentId(Integer contentId) {
 		this.contentId = contentId;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
     
     

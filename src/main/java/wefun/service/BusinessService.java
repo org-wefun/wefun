@@ -6,6 +6,16 @@ import wefun.model.po.CategoryPO;
 import wefun.model.vo.CategoryVO;
 
 public interface BusinessService {
-	List<CategoryPO> getCatagoria();
+	/**
+	 * 获取一级菜单
+	 * @return
+	 */
+	List<CategoryPO> getNavigation();
+	/**
+	 * 获取菜单下的所有资源
+	 * @param id
+	 * @return
+	 */
     List<CategoryVO> getCatagoria(Integer id);
+    
 }
