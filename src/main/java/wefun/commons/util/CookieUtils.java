@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CookieUtils {
 	public static final int DEFAULT_TOKEN_ALIVE = 24 * 60 * 60;
-	public static final String TOKEN = "LONIN_INFO";
+	public static final String TOKEN = "SESSION_ID";
 	public static final String DEFAULT_PATH = "/";
 	public static final String DEFAULT_DOMAIN = ".guoruyafeng.com";
 

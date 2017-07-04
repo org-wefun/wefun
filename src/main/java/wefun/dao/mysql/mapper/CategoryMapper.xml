@@ -19,6 +19,21 @@
 		</where>
 	</select>
 	
+	<select id="getCategory" resultType="wefun.model.po.CategoryPO" parameterType="wefun.model.po.CategoryPO">
+		SELECT * FROM category
+		<where>
+		 <if test="parentId != null">
+		     parentId = #{parentId}
+		 </if>
+		 <if test="type != null">
+		     AND type = #{type}
+		 </if>
+		 <if test="level != null">
+		     AND level = #{level}
+		 </if>
+		</where>
+	</select>
+	
 	<insert id="insert" parameterType="wefun.model.po.CategoryPO" useGeneratedKeys="true" keyProperty="id">
 		insert into category 
 			(`name`,`level`,`parentId`,`type`,`order`,`createTime`,`updateTime`) 

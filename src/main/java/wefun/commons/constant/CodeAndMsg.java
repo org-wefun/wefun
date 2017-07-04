@@ -9,6 +9,7 @@ public enum CodeAndMsg {
 	INVALID_PARAM(1002, "无效的参数"), 
 	CANNOT_FIND_IN_DATABASE(1003, "数据库没有记录"),
 	INVALID_ACCOUNT(1004, "无效的账号"), 
+	NEED_LOGIN(1005,"请登录"),
 	PASSWORD_ACCOUNT_ERROR(1004, "账号或密码错误");
 
 	private String msg;

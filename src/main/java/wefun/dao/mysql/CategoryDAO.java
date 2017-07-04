@@ -8,6 +8,8 @@ public interface CategoryDAO {
 	
 	public List<CategoryPO> getCategoryList(CategoryPO categoryPO);
 	
-	Integer insert(CategoryPO categoryPO);
+	public Integer insert(CategoryPO categoryPO);
+	
+    public CategoryPO getCategory(CategoryPO categoryPO);
 
 }

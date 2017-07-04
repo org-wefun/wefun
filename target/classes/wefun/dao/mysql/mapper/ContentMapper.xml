@@ -4,6 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
    
 <mapper namespace="wefun.dao.mysql.ContentDAO">  
-     
-    
+     <select id="getCategoryList" resultType="wefun.model.po.ContentPO" parameterType="java.lang.Integer">
+		SELECT * FROM content
+		<where>
+		 <if test="categoryId != null">
+		     categoryId = #{categoryId}
+		 </if>
+		</where>
+	</select>
 </mapper> 

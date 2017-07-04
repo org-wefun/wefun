@@ -8,13 +8,17 @@ import org.springframework.util.StringUtils;
 
 import wefun.commons.constant.CodeAndMsg;
 import wefun.commons.exception.BusinessRuntimeException;
+import wefun.commons.util.MD5Utils;
 import wefun.dao.mysql.UserDAO;
 import wefun.model.po.UserPO;
+import wefun.service.CacheService;
 import wefun.service.UserService;
 @Service
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	@Autowired
     private UserDAO userDAO;
+	@Autowired
+	private CacheService cacheService;
 	@Override
 	public UserPO getUser(String account) {
 		if(!StringUtils.hasText(account)){
@@ -25,7 +29,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 	
 	@Override
-	public boolean login(UserPO userPO) {
+	public String login(UserPO userPO) {
 		if(null == userPO){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		} 
@@ -45,7 +49,10 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		if(!Objects.equals(password, password_DB)){
 			throw new BusinessRuntimeException(CodeAndMsg.PASSWORD_ACCOUNT_ERROR);
 		}
-		return true;
+		//写入缓存
+		final String key = MD5Utils.MD5(account);
+		cacheService.set(key, userPODB);
+		return key;
 	}
 
 }

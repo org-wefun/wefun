@@ -18,14 +18,15 @@ public class InformationDAOTest extends BaseTest{
 	@Test
 	public void add(){
 		InformationPO informationPO = new InformationPO();
-		informationPO.setAddress("test");
-		informationPO.setEmail("");
-		informationPO.setPhone("");
-		informationPO.setQq("");
+		informationPO.setAddress("武成大街2号莱茵春天1709");
+		informationPO.setEmail("3258613042@qq.com");
+		informationPO.setPhone("028-86612315");
+		informationPO.setQq("3258613042");
 		informationPO.setQrCodeQQ("");
-		informationPO.setWechat("");
+		informationPO.setWechat("国儒雅风(公众号)");
 		informationPO.setQrCodeWechat("");
-		System.out.println(JSON.toJSONString(informationDAO.insert(informationPO)));
+		informationPO.setId(1);
+		informationDAO.update(informationPO);
 	}
 
 }
