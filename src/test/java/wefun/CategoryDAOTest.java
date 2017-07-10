@@ -15,7 +15,7 @@ public class CategoryDAOTest extends BaseTest{
 	public void test1(){
 		CategoryPO category = new CategoryPO();
 		category.setLevel(1);
-		category.setType(1);
+//		category.setType(1);
 		System.out.println(JSON.toJSONString(categoryDAO.getCategoryList(category)));
 	}
 	@Test

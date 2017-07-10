@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wefun.dao.mysql.ResourceDAO">
+
+	<select id="getResourceList" parameterType="wefun.model.po.ResourcePO"
+		resultType="wefun.model.po.ResourcePO">
+		select * from resource
+		<where>
+			<if test="categoryId != null ">
+				categoryId = #{categoryId}
+			</if>
+			<if test="contentId != null ">
+				AND contentId = #{contentId}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="wefun.model.po.ResourcePO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into content
+		(`url`,`type`,`desc`,`order`,`categoryId`,`contentId`,`createTime`,`updateTime`)
+		values
+		(#{url},#{type},#{desc},#{order},#{categoryId},#{contentId},now(),now())
+	</insert>
+    
+	<update id="update" parameterType="wefun.model.po.ResourcePO">
+		update resource
+		<set>
+			url = #{url},
+			type = #{type},
+			order = #{order},
+			categoryId = #{categoryId},
+			contentId = #{contentId},
+			desc = #{desc},
+			updateTime = now()
+		</set>
+		where `id` = #{id}
+	</update>
+		<select id="get" parameterType = "java.lang.Integer" resultType="wefun.model.po.ResourcePO">
+		select * from resource where id = #{id}
+	</select>
+		
+    <delete id="delete" parameterType="java.lang.Integer">
+    	delete from resource where id = #{id}
+    </delete>
+   
+</mapper> 

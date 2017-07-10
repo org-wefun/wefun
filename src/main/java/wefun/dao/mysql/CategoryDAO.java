@@ -10,6 +10,10 @@ public interface CategoryDAO {
 	
 	public Integer insert(CategoryPO categoryPO);
 	
+	public void update(CategoryPO categoryPO);
+	
     public CategoryPO getCategory(CategoryPO categoryPO);
+    
+    void delete(Integer id);
 
 }

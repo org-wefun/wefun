@@ -7,6 +7,7 @@ import java.util.List;
  *
  */
 public class CategoryVO {
+	private Integer id;
 	private Integer level;
 	private String name;
 	private List<ContentVO> contentList;
@@ -28,6 +29,12 @@ public class CategoryVO {
 	}
 	public void setContentList(List<ContentVO> contentList) {
 		this.contentList = contentList;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

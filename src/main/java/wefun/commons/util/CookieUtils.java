@@ -4,8 +4,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 public class CookieUtils {
+	public static final String SESSION_ID = "SESSION_ID";
 	public static final int DEFAULT_TOKEN_ALIVE = 24 * 60 * 60;
-	public static final String TOKEN = "SESSION_ID";
 	public static final String DEFAULT_PATH = "/";
 	public static final String DEFAULT_DOMAIN = ".guoruyafeng.com";
 
@@ -14,7 +14,7 @@ public class CookieUtils {
 	}
 
 	public static void addCookie(HttpServletResponse response, String value, int alive) {
-		addCookie(response, TOKEN, value, alive, DEFAULT_PATH, DEFAULT_DOMAIN);
+		addCookie(response, SESSION_ID, value, alive, DEFAULT_PATH, DEFAULT_DOMAIN);
 	}
 
 	public static void addCookie(HttpServletResponse response, String key, String val, int alive, String path,

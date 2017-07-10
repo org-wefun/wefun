@@ -4,6 +4,7 @@ import java.util.List;
 
 import wefun.model.po.CategoryPO;
 import wefun.model.po.InformationPO;
+import wefun.model.po.ResourcePO;
 import wefun.model.vo.CategoryVO;
 
 public interface ViewService {
@@ -11,7 +12,7 @@ public interface ViewService {
 	 * 获取首页轮播图
 	 * @return
 	 */
-	public CategoryVO getBanner();
+	public List<ResourcePO> getBanner();
 	/**
 	 * 获取基本信息
 	 * @return

@@ -5,6 +5,7 @@ import java.util.List;
 import wefun.model.po.ResourcePO;
 
 public class ContentVO {
+	private Integer id;
 	private String title;
 	private List<ResourcePO> resourceList;
 	private String content;
@@ -25,6 +26,12 @@ public class ContentVO {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 

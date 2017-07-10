@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,10 +21,13 @@ import wefun.commons.util.CookieUtils;
 import wefun.commons.util.PropertiesUtils;
 import wefun.commons.util.ThreadLocalUtils;
 import wefun.model.po.UserPO;
+import wefun.service.CacheService;
 
 public class LoginInterceptor implements HandlerInterceptor {
 	private static final Logger LOG = LoggerFactory.getLogger(LoginInterceptor.class);
 	private static Set<String> nonLoginSet = null;
+	@Autowired
+	private CacheService cacheService;
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
@@ -41,14 +45,14 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(this.checkNonLogin(request.getRequestURI(), nonLoginSet)){
         	return true;
         }
-		final String token = this.getToken(request);
-		if (!StringUtils.hasText(token)) {
+		final String SESSION_ID = this.getSessionId(request);
+		if (!StringUtils.hasText(SESSION_ID)) {
 			Result result = new Result(CodeAndMsg.NEED_LOGIN);
 			result.setSuccess(false);
 			response.getWriter().write(JSON.toJSONString(result));
 			return false;
 		}else{
-			return checkToken(token);
+			return checkSession(SESSION_ID);
 		}
 	}
 
@@ -62,9 +66,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 		return false;
 	}
 
-	private boolean checkToken(String token) {
-		//TODO
-		UserPO userPO = new UserPO();
+	private boolean checkSession(String sessionId) {
+		UserPO userPO = (UserPO)cacheService.get(sessionId);
+		if(null == userPO){
+			LOG.info("用户鉴权,鉴权失败,SESSION:{}",sessionId);
+			return false;
+		}
+		LOG.info("用户鉴权:{},鉴权成功",userPO.getAccount());
 		setUserInThreadLocal(userPO);
 		return true;
 	}
@@ -73,22 +81,22 @@ public class LoginInterceptor implements HandlerInterceptor {
 		ThreadLocalUtils.setObject(ThreadLocalUtils.USER_KEY, userPO);
 	}
 
-	private String getToken(HttpServletRequest request) {
-		String token = null;
+	private String getSessionId(HttpServletRequest request) {
+		String session_id = null;
 		Cookie[] cookies = request.getCookies();
 		if (null != cookies) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals(CookieUtils.TOKEN)) {
-					token = cookie.getValue();
+				if (cookie.getName().equals(CookieUtils.SESSION_ID)) {
+					session_id = cookie.getValue();
 				}
 			}
 		}
 		// 如果cookie中没有token
-		if (!StringUtils.hasText(token)) {
+		if (!StringUtils.hasText(session_id)) {
 			// 参数中获取
-			token = request.getParameter(CookieUtils.TOKEN);
+			session_id = request.getParameter(CookieUtils.SESSION_ID);
 		}
-		return token;
+		return session_id;
 	}
 
 

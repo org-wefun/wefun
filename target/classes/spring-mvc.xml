@@ -39,10 +39,10 @@
 	<!-- 登录拦截 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-          <mvc:mapping path="/**"/>
-          <mvc:exclude-mapping path="/"/>
-           <mvc:exclude-mapping path="/view/*.*"/>
-          <bean class="wefun.interceptor.LoginInterceptor"/>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/" />
+			<mvc:exclude-mapping path="/wefun/view/getBaseInfo" />
+			<bean class="wefun.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
     <mvc:resources location="/" mapping="/**"/>

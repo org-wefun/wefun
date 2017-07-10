@@ -18,6 +18,7 @@
      
      <update id="update" parameterType="wefun.model.po.InformationPO">
          update information
+         
          <set>
          email = #{email},
          address = #{address},
@@ -28,6 +29,10 @@
          qrCodeQQ = #{qrCodeQQ},
          updateTime = now()
          </set>
+         
+         <where>
+         `id` = #{id}
+         </where>
      </update>
     
 </mapper> 
