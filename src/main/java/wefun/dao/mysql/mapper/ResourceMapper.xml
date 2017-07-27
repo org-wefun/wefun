@@ -20,7 +20,7 @@
 
 	<insert id="insert" parameterType="wefun.model.po.ResourcePO"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into content
+		insert into resource
 		(`url`,`type`,`desc`,`order`,`categoryId`,`contentId`,`createTime`,`updateTime`)
 		values
 		(#{url},#{type},#{desc},#{order},#{categoryId},#{contentId},now(),now())
@@ -29,17 +29,18 @@
 	<update id="update" parameterType="wefun.model.po.ResourcePO">
 		update resource
 		<set>
-			url = #{url},
-			type = #{type},
-			order = #{order},
-			categoryId = #{categoryId},
-			contentId = #{contentId},
-			desc = #{desc},
-			updateTime = now()
+			`url` = #{url},
+			`type` = #{type},
+			`order` = #{order},
+			`categoryId` = #{categoryId},
+			`contentId` = #{contentId},
+			`desc` = #{desc},
+			`updateTime` = now()
 		</set>
 		where `id` = #{id}
 	</update>
-		<select id="get" parameterType = "java.lang.Integer" resultType="wefun.model.po.ResourcePO">
+	
+	<select id="get" parameterType = "java.lang.Integer" resultType="wefun.model.po.ResourcePO">
 		select * from resource where id = #{id}
 	</select>
 		

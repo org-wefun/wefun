@@ -1,5 +1,9 @@
 package wefun.model.po;
-
+/**
+ * 
+ * @author dongyangyang
+ *
+ */
 public class UserPO extends BasePO{
 	private static final long serialVersionUID = -5597789572384988240L;
 	private String account;

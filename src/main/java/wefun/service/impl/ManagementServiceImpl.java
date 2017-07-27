@@ -82,7 +82,7 @@ public class ManagementServiceImpl implements ManagementService{
 		if(null == id){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
-//		gategoryDAO.delete(id);
+		gategoryDAO.delete(id);
 	}
 
 	@Override
@@ -102,14 +102,14 @@ public class ManagementServiceImpl implements ManagementService{
 		if(null == id){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
-//		ContentPO contentDB = contnetDAO.get(id);
-//		if(null == contentDB){
-//			throw new BusinessRuntimeException(CodeAndMsg.CANNOT_FIND_IN_DATABASE);
-//		}
-//		contentDB.setCategoryId(contentPO.getCategoryId());
-//		contentDB.setContent(contentPO.getContent());
-//		contentDB.setOrder(contentPO.getOrder());
-//		contentDB.setTitle(contentPO.getTitle());
+		ContentPO contentDB = contnetDAO.get(id);
+		if(null == contentDB){
+			throw new BusinessRuntimeException(CodeAndMsg.CANNOT_FIND_IN_DATABASE);
+		}
+		contentDB.setCategoryId(contentPO.getCategoryId());
+		contentDB.setContent(contentPO.getContent());
+		contentDB.setOrder(contentPO.getOrder());
+		contentDB.setTitle(contentPO.getTitle());
 		contnetDAO.update(contentPO);
 	}
 
@@ -118,7 +118,7 @@ public class ManagementServiceImpl implements ManagementService{
 		if(null == contentId){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
-//		contnetDAO.delete(contentId);
+		contnetDAO.delete(contentId);
 	}
 
 	@Override
@@ -146,16 +146,16 @@ public class ManagementServiceImpl implements ManagementService{
 		if(id == null){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
-//		ResourcePO resourceDB = resourceDAO.get(id);
-//		if(null == resourceDB){
-//			throw new BusinessRuntimeException(CodeAndMsg.CANNOT_FIND_IN_DATABASE);
-//		}
-//		resourceDB.setCategoryId(resourcePO.getCategoryId());
-//		resourceDB.setContentId(resourcePO.getContentId());
-//		resourceDB.setDesc(resourcePO.getDesc());
-//		resourceDB.setOrder(resourcePO.getOrder());
-//		resourceDB.setType(resourcePO.getType());
-//		resourceDB.setUrl(resourcePO.getUrl());
+		ResourcePO resourceDB = resourceDAO.get(id);
+		if(null == resourceDB){
+			throw new BusinessRuntimeException(CodeAndMsg.CANNOT_FIND_IN_DATABASE);
+		}
+		resourceDB.setCategoryId(resourcePO.getCategoryId());
+		resourceDB.setContentId(resourcePO.getContentId());
+		resourceDB.setDesc(resourcePO.getDesc());
+		resourceDB.setOrder(resourcePO.getOrder());
+		resourceDB.setType(resourcePO.getType());
+		resourceDB.setUrl(resourcePO.getUrl());
 		
 		resourceDAO.update(resourcePO);
 		
@@ -166,7 +166,7 @@ public class ManagementServiceImpl implements ManagementService{
 		if(null == id){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
-//		resourceDAO.delete(id);
+		resourceDAO.delete(id);
 	}
 
 	@Override

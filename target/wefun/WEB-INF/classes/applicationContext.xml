@@ -18,12 +18,14 @@
      http://www.feige.io/feige/feige.xsd
     "
 	default-autowire="byName">
-	
-	<!-- 激活Spring注解方式：自动扫描，并注入bean  -->
-	<context:component-scan base-package="wefun"/> 
-    <!--aspectj支持自动代理实现AOP功能 -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+	<!-- 激活Spring注解方式：自动扫描，并注入bean -->
+	<context:component-scan base-package="wefun" />
+	<!--aspectj支持自动代理实现AOP功能 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- 导入外部文件 -->
-	<context:property-placeholder location="classpath:jdbc.properties"/>
-	<import resource="classpath:spring-mybatis.xml"/>  
+	<context:property-placeholder
+		location="classpath:jdbc.properties,
+	  classpath:ali.properties" />
+	<import resource="classpath:spring-mybatis.xml" />
 </beans>

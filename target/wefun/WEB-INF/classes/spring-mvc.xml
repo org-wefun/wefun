@@ -22,7 +22,8 @@
 				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
 				<property name="supportedMediaTypes">
 					<list>
-						<value>text/html;charset=UTF-8</value>  <!-- 避免IE出现下载JSON文件的情况 -->
+					     <!-- 避免IE出现下载JSON文件的情况 -->
+						<value>text/html;charset=UTF-8</value> 
 						<value>application/json</value>
 					</list>
 				</property>
@@ -35,7 +36,15 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
+	<!-- 登录拦截 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/" />
+			<mvc:exclude-mapping path="/wefun/view/getBaseInfo" />
+			<bean class="wefun.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
     <mvc:resources location="/" mapping="/**"/>
 	<!-- 配置视图解析 -->
 	<!--  

@@ -6,7 +6,7 @@
 <mapper namespace="wefun.dao.mysql.UserDAO">  
      
     <select id="findByAccount" parameterType="java.lang.String" resultType="wefun.model.po.UserPO">  
-       select * from user where account=#{account}  
+       select * from user where account = #{account}  
     </select>  
     
 </mapper> 

@@ -14,6 +14,17 @@ public interface ViewService {
 	 */
 	public List<ResourcePO> getBanner();
 	/**
+	 * 获取合作伙伴
+	 * @return
+	 */
+	public CategoryVO getPartner();
+	
+	/**
+	 * 获取团队
+	 * @return
+	 */
+	public List<ResourcePO> getTeam();
+	/**
 	 * 获取基本信息
 	 * @return
 	 */

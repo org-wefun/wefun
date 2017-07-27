@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+   
+<mapper namespace="wefun.dao.mysql.TeamDAO">  
+     
+    <select id="list"  resultType="wefun.model.po.TeamPO">  
+       SELECT * FROM team 
+    </select>  
+    
+    <select id="get" parameterType="int" resultType="wefun.model.po.TeamPO">  
+       SELECT * FROM team WHERE id = #{id}
+    </select>
+    
+    <delete id="delete" parameterType="int">
+       DELETE FROM team WHERE id = #{id}
+    </delete>
+    
+    <insert id="insert" parameterType="wefun.model.po.TeamPO"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO team
+		(`name`,`degree`,`desc`,`qrcodeWechat`,`qrcodeQQ`,`photo`,`label`,`order`,`createTime`,`updateTime`)
+		VALUES
+		(#{name},#{degree},#{desc},#{qrcodeWechat},#{qrcodeQQ},#{photo},#{label},#{order},now(),now())
+	</insert>
+    
+    <update id="update" parameterType="wefun.model.po.TeamPO">
+        UPDATE team
+        <set>
+			`name`          = #{name},
+			`degree`        = #{degree},
+			`qrcodeWechat`  = #{qrcodeWechat},
+			`qrcodeQQ`      = #{qrcodeQQ},
+			`photo`         = #{photo},
+			`label`         = #{label},
+			`order`         = #{order},
+			`updateTime`    = now()
+		</set>
+		WHERE id = #{id}
+    
+    </update>
+</mapper> 

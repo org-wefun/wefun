@@ -24,11 +24,12 @@ public class UserController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = {RequestMethod.POST,RequestMethod.GET})
 	public @ResponseBody Result getDetail(HttpServletRequest request,HttpServletResponse response,@ModelAttribute UserPO userPO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			final String key = userService.login(userPO);
+			LOG.info("登录成功,session id is :{}",key);
 			if(StringUtils.hasText(key)){
 				CookieUtils.addCookie(response, key);
 			}

@@ -4,7 +4,7 @@ import java.util.List;
 
 import wefun.model.po.ContentPO;
 
-public interface ContentDAO {
+public interface ContentDAO {              
 	List<ContentPO> getContentList(Integer categoryId);
 	
 	Integer insert(ContentPO contentPO);

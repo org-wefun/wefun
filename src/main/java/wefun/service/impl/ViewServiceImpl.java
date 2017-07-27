@@ -42,7 +42,28 @@ public class ViewServiceImpl extends BaseServiceImpl implements ViewService{
 		}
 		return resourceList;
 	}
+	@Override
+	public CategoryVO getPartner() {
+		CategoryPO categoryPO = new CategoryPO();
+		categoryPO.setType(CategoryType.PARTNER);
+		CategoryPO categoryPODB = gategoryDAO.getCategory(categoryPO);
+		
+		CategoryVO categoryVO = new CategoryVO();
+		final Integer categoryId = categoryPODB.getId();
+		categoryVO.setName(categoryPODB.getName());
+		categoryVO.setLevel(categoryPODB.getLevel());
+		categoryVO.setId(categoryId);
+		List<ContentPO> contentPOList = contnetDAO.getContentList(categoryId);
+		categoryVO.setContentList(this.getContentVO(contentPOList));
+		
+		return categoryVO;
+	}
 
+	@Override
+	public List<ResourcePO> getTeam() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public InformationPO getBaseInfo() {
 		return informationDAO.get();
@@ -96,4 +117,7 @@ public class ViewServiceImpl extends BaseServiceImpl implements ViewService{
 		}
 		return resultList;
 	}
+
+	
+	
 }

@@ -1,8 +1,8 @@
 package wefun.model.po;
 /**
  * 
- * @author Administrator
- * 
+ * @author dongyangyang
+ *
  */
 public class ResourcePO extends BasePO{
 	

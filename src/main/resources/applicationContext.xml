@@ -26,6 +26,6 @@
 	<!-- 导入外部文件 -->
 	<context:property-placeholder
 		location="classpath:jdbc.properties,
-	  classpath:oss.properties" />
+	  classpath:ali.properties" />
 	<import resource="classpath:spring-mybatis.xml" />
 </beans>

@@ -1,5 +1,9 @@
 package wefun.model.po;
-
+/**
+ * 
+ * @author dongyangyang
+ *
+ */
 public class InformationPO extends BasePO{
 	
 	private static final long serialVersionUID = 4596212800246750075L;
@@ -12,7 +16,14 @@ public class InformationPO extends BasePO{
 	private String qrCodeWechat;
 	private String qrCodeQQ;
 	private String aboutUs;
+	private String slogan;
 	
+	public String getSlogan() {
+		return slogan;
+	}
+	public void setSlogan(String slogan) {
+		this.slogan = slogan;
+	}
 	public Integer getId() {
 		return id;
 	}

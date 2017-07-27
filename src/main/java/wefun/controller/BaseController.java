@@ -5,4 +5,5 @@ import org.slf4j.LoggerFactory;
 
 public class BaseController {
 	public final static Logger LOG = LoggerFactory.getLogger(UserController.class);
+	
 }

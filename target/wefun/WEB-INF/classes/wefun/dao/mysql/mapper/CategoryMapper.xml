@@ -4,26 +4,64 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="wefun.dao.mysql.CategoryDAO">
-	<select id="getCategoryList" resultType="wefun.model.po.CategoryPO" parameterType="wefun.model.po.CategoryPO">
+
+	<select id="getCategoryList" resultType="wefun.model.po.CategoryPO"
+		parameterType="wefun.model.po.CategoryPO">
 		SELECT * FROM category
 		<where>
-		 <if test="parentId != null">
-		     parentId = #{parentId}
-		 </if>
-		 <if test="type != null">
-		     AND type = #{type}
-		 </if>
-		 <if test="level != null">
-		     AND level = #{level}
-		 </if>
+			<if test="parentId != null">
+				parentId = #{parentId}
+			</if>
+			<if test="type != null">
+				AND type = #{type}
+			</if>
+			<if test="level != null">
+				AND level = #{level}
+			</if>
 		</where>
 	</select>
-	
-	<insert id="insert" parameterType="wefun.model.po.CategoryPO" useGeneratedKeys="true" keyProperty="id">
-		insert into category 
-			(`name`,`level`,`parentId`,`type`,`order`,`createTime`,`updateTime`) 
+
+	<select id="getCategory" resultType="wefun.model.po.CategoryPO"
+		parameterType="wefun.model.po.CategoryPO">
+		SELECT * FROM category
+		<where>
+			<if test="parentId != null">
+				parentId = #{parentId}
+			</if>
+			<if test="type != null">
+				AND type = #{type}
+			</if>
+			<if test="level != null">
+				AND level = #{level}
+			</if>
+			<if test="id != null">
+				AND id = #{id}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="wefun.model.po.CategoryPO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into category
+		(`name`,`level`,`parentId`,`type`,`order`,`createTime`,`updateTime`)
 		values
-			(#{name},#{level},#{parentId},#{type},#{order},now(),now())
+		(#{name},#{level},#{parentId},#{type},#{order},now(),now())
 	</insert>
 
+	<update id="update" parameterType="wefun.model.po.CategoryPO">
+		update category
+		<set>
+			`name` = #{name},
+			`level` = #{level},
+			`parentId`= #{parentId},
+			`type` = #{type},
+			`order` = #{order},
+			`updateTime` = now()
+		</set>
+		where `id` = #{id}
+	</update>
+	
+    <delete id="delete" parameterType="java.lang.Integer">
+    	delete from category where id = #{id}
+    </delete>
 </mapper> 

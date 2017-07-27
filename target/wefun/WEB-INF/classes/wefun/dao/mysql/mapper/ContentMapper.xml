@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper  
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-   
-<mapper namespace="wefun.dao.mysql.ContentDAO">  
-     
-    
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wefun.dao.mysql.ContentDAO">
+	<select id="getCategoryList" resultType="wefun.model.po.ContentPO"
+		parameterType="java.lang.Integer">
+		SELECT * FROM content
+		<where>
+			<if test="categoryId != null">
+				categoryId = #{categoryId}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insert" parameterType="wefun.model.po.ContentPO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into content
+		(`categoryId`,`title`,`content`,`order`,`createTime`,`updateTime`)
+		values
+		(#{categoryId},#{title},#{content},#{order},#{createTime},#{updateTime})
+	</insert>
+
+	<update id="update" parameterType="wefun.model.po.ContentPO">
+		update content
+		<set>
+			`categoryId` = #{categoryId},
+			`title` = #{title},
+			`content` = #{content},
+			`order` = #{order},
+			`updateTime` = now()
+		</set>
+		where id = #{id}
+	</update>
+	<select id="get" parameterType = "java.lang.Integer" resultType="wefun.model.po.ContentPO">
+		select * from content where id = #{id}
+	</select>
+		
+    <delete id="delete" parameterType="java.lang.Integer">
+    	delete from content where id = #{id}
+    </delete>
 </mapper> 
