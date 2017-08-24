@@ -21,9 +21,9 @@
 	<insert id="insert" parameterType="wefun.model.po.ResourcePO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into resource
-		(`url`,`type`,`desc`,`order`,`categoryId`,`contentId`,`createTime`,`updateTime`)
+		(`url`,`type`,`desc`,`order`,`categoryId`,`contentId`,`createTime`,`updateTime`,`route`)
 		values
-		(#{url},#{type},#{desc},#{order},#{categoryId},#{contentId},now(),now())
+		(#{url},#{type},#{desc},#{order},#{categoryId},#{contentId},now(),now(),#{route})
 	</insert>
     
 	<update id="update" parameterType="wefun.model.po.ResourcePO">
@@ -35,6 +35,7 @@
 			`categoryId` = #{categoryId},
 			`contentId` = #{contentId},
 			`desc` = #{desc},
+			`route` =#{route},
 			`updateTime` = now()
 		</set>
 		where `id` = #{id}
@@ -47,5 +48,18 @@
     <delete id="delete" parameterType="java.lang.Integer">
     	delete from resource where id = #{id}
     </delete>
+    
+    <select id="searchResource"  parameterType="wefun.model.po.ResourcePO" resultType="wefun.model.po.ResourcePO">
+    select * from resource
+		<where>
+			<if test="desc != null and desc != ''">
+				 `desc` like CONCAT('%',#{desc},'%') 
+			</if>
+			<if test="type != null and type != 0">
+			     AND type = #{type}
+			</if>
+		</where>
+		order by createTime desc
+    </select>
    
 </mapper> 

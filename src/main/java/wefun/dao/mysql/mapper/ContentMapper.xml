@@ -23,8 +23,7 @@
 		<set>
 			`categoryId` = #{categoryId},
 			`title` = #{title},
-			`content` =
-			#{content},
+			`content`= #{content},
 			`order` = #{order},
 			`updateTime` = now()
 		</set>

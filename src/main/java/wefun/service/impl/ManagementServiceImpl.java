@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
+
 import wefun.commons.constant.CodeAndMsg;
 import wefun.commons.exception.BusinessRuntimeException;
 import wefun.dao.mysql.CategoryDAO;
@@ -33,16 +35,13 @@ public class ManagementServiceImpl implements ManagementService{
 		}
 		informationDAO.update(informationPO);
 	}
-	
-	public void getAccess(){
-		
-	}
 
 	@Override
 	public void addCategory(CategoryPO categoryPO) {
 		if(null == categoryPO){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
+		System.out.println(JSON.toJSONString(categoryPO));
 		gategoryDAO.insert(categoryPO);
 		
 	}
@@ -156,7 +155,7 @@ public class ManagementServiceImpl implements ManagementService{
 		resourceDB.setOrder(resourcePO.getOrder());
 		resourceDB.setType(resourcePO.getType());
 		resourceDB.setUrl(resourcePO.getUrl());
-		
+		resourceDB.setRoute(resourcePO.getRoute());
 		resourceDAO.update(resourcePO);
 		
 	}
@@ -175,6 +174,14 @@ public class ManagementServiceImpl implements ManagementService{
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
 		return resourceDAO.getResourceList(resourcePO);
+	}
+
+	@Override
+	public List<ResourcePO> getResourceList(String desc, int type) {
+		ResourcePO resourcePO = new ResourcePO();
+		resourcePO.setDesc(desc);
+		resourcePO.setType(type);
+		return resourceDAO.searchResource(resourcePO);
 	}
 
 }

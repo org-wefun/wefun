@@ -60,11 +60,6 @@ public class ViewServiceImpl extends BaseServiceImpl implements ViewService{
 	}
 
 	@Override
-	public List<ResourcePO> getTeam() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public InformationPO getBaseInfo() {
 		return informationDAO.get();
 	}
@@ -80,8 +75,8 @@ public class ViewServiceImpl extends BaseServiceImpl implements ViewService{
 	@Override
 	public List<CategoryVO> getCatagoria(Integer id) {
 		CategoryPO categoryPO = new CategoryPO();
-		categoryPO.setLevel(1);
-		categoryPO.setType(2);
+//		categoryPO.setLevel(1);
+//		categoryPO.setType(2);
 		categoryPO.setParentId(id);
 		List<CategoryPO> categoryList = gategoryDAO.getCategoryList(categoryPO);
 		List<CategoryVO> result = new ArrayList<>();
@@ -91,6 +86,7 @@ public class ViewServiceImpl extends BaseServiceImpl implements ViewService{
 				final Integer categoryId = categoryPO2.getId();
 				categoryVO.setName(categoryPO2.getName());
 				categoryVO.setLevel(categoryPO2.getLevel());
+				categoryVO.setOrder(categoryPO2.getOrder());
 				categoryVO.setId(categoryId);
 				List<ContentPO> contentPOList = contnetDAO.getContentList(categoryId);
 				categoryVO.setContentList(this.getContentVO(contentPOList));
@@ -109,6 +105,7 @@ public class ViewServiceImpl extends BaseServiceImpl implements ViewService{
 				contentVO.setId(contentId);
 				contentVO.setContent(content.getContent());
 				contentVO.setTitle(content.getTitle());
+				contentVO.setOrder(content.getOrder());
 				ResourcePO resourcePO = new ResourcePO();
 				resourcePO.setContentId(contentId);
 				contentVO.setResourceList(resourceDAO.getResourceList(resourcePO));
@@ -118,6 +115,5 @@ public class ViewServiceImpl extends BaseServiceImpl implements ViewService{
 		return resultList;
 	}
 
-	
 	
 }

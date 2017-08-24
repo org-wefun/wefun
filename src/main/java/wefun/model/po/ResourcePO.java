@@ -22,6 +22,14 @@ public class ResourcePO extends BasePO{
     
     private String desc;
     
+    private String route;
+    
+	public String getRoute() {
+		return route;
+	}
+	public void setRoute(String route) {
+		this.route = route;
+	}
 	public Integer getId() {
 		return id;
 	}

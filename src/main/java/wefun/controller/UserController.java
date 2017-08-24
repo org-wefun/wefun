@@ -8,7 +8,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import wefun.commons.Result;
@@ -25,7 +24,7 @@ public class UserController extends BaseController{
 	private UserService userService;
 	
 	@RequestMapping(value = "/login", method = {RequestMethod.POST,RequestMethod.GET})
-	public @ResponseBody Result getDetail(HttpServletRequest request,HttpServletResponse response,@ModelAttribute UserPO userPO) {
+	public  Result getDetail(HttpServletRequest request,HttpServletResponse response, @ModelAttribute UserPO userPO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			final String key = userService.login(userPO);

@@ -7,6 +7,7 @@ import wefun.model.po.ResourcePO;
 public class ContentVO {
 	private Integer id;
 	private String title;
+	private int order;
 	private List<ResourcePO> resourceList;
 	private String content;
 	public String getTitle() {
@@ -32,6 +33,12 @@ public class ContentVO {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
 	}
 	
 

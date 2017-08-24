@@ -5,7 +5,10 @@ import java.util.List;
 import wefun.model.po.ResourcePO;
 
 public interface ResourceDAO {
+	
 	List<ResourcePO> getResourceList(ResourcePO resourcePO);
+	
+	List<ResourcePO> searchResource(ResourcePO resourcePO);
 	
 	Integer insert(ResourcePO resourcePO);
 	

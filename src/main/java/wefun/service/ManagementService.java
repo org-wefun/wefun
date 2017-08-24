@@ -33,5 +33,12 @@ public interface ManagementService {
 	void deleteResource(Integer id);
 	
 	List<ResourcePO> getResourceList(ResourcePO resourcePO);
+	/**
+	 * 
+	 * @param desc 
+	 * @param type  1=图片 2=视频
+	 * @return
+	 */
+	List<ResourcePO> getResourceList(String desc,int type);
     
 }

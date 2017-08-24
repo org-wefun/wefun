@@ -20,9 +20,9 @@
     <insert id="insert" parameterType="wefun.model.po.TeamPO"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO team
-		(`name`,`degree`,`desc`,`qrcodeWechat`,`qrcodeQQ`,`photo`,`label`,`order`,`createTime`,`updateTime`)
+		(`name`,`degree`,`desc`,`descDetail`,`qrCodeWechat`,`qrCodeQQ`,`photo`,`label`,`order`,`createTime`,`updateTime`)
 		VALUES
-		(#{name},#{degree},#{desc},#{qrcodeWechat},#{qrcodeQQ},#{photo},#{label},#{order},now(),now())
+		(#{name},#{degree},#{desc},#{descDetail},#{qrCodeWechat},#{qrCodeQQ},#{photo},#{label},#{order},now(),now())
 	</insert>
     
     <update id="update" parameterType="wefun.model.po.TeamPO">
@@ -30,14 +30,15 @@
         <set>
 			`name`          = #{name},
 			`degree`        = #{degree},
-			`qrcodeWechat`  = #{qrcodeWechat},
-			`qrcodeQQ`      = #{qrcodeQQ},
+			`desc`          = #{desc},
+			`descDetail`    = #{descDetail},
+			`qrCodeWechat`  = #{qrCodeWechat},
+			`qrCodeQQ`      = #{qrCodeQQ},
 			`photo`         = #{photo},
 			`label`         = #{label},
 			`order`         = #{order},
 			`updateTime`    = now()
 		</set>
 		WHERE id = #{id}
-    
     </update>
 </mapper> 

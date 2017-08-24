@@ -10,6 +10,7 @@ public class CategoryVO {
 	private Integer id;
 	private Integer level;
 	private String name;
+	private int order;
 	private List<ContentVO> contentList;
 	
 	public Integer getLevel() {
@@ -35,6 +36,12 @@ public class CategoryVO {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 }

@@ -17,21 +17,26 @@ import wefun.commons.exception.BusinessRuntimeException;
 import wefun.model.po.CategoryPO;
 import wefun.model.po.ContentPO;
 import wefun.model.po.InformationPO;
+import wefun.model.po.PartnerPO;
 import wefun.model.po.ResourcePO;
 import wefun.model.po.TeamPO;
 import wefun.service.ManagementService;
+import wefun.service.PartnerService;
 import wefun.service.TeamService;
 
 @RestController
-@RequestMapping("/managerment")
-public class ManagementConroller extends BaseController{
+@RequestMapping("/management")
+public class ManagementConroller extends BaseController {
 	@Autowired
 	private ManagementService managementService;
 	@Autowired
 	private TeamService teamService;
+	@Autowired
+	private PartnerService partnerService;
 
-	@RequestMapping(value = "/updateBaseInfo",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result updateBaseInfo(HttpServletRequest request,HttpServletResponse response,@ModelAttribute InformationPO informationPO ) {
+	@RequestMapping(value = "/setBaseInfo", method = { RequestMethod.POST, RequestMethod.GET })
+	public Result updateBaseInfo(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute InformationPO informationPO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.updateBaseInfo(informationPO);
@@ -49,9 +54,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = "/getCategoryList", method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result getCategoryList(HttpServletRequest request,HttpServletResponse response,@ModelAttribute CategoryPO categoryPO ) {
+
+	@RequestMapping(value = "/getCategoryList", method = { RequestMethod.POST, RequestMethod.GET })
+	public Result getCategoryList(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute CategoryPO categoryPO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			result.setData(managementService.getCategoryList(categoryPO));
@@ -69,9 +75,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = "/addCategory",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result addCategory(HttpServletRequest request,HttpServletResponse response,@ModelAttribute CategoryPO categoryPO ) {
+
+	@RequestMapping(value = "/addCategory", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result addCategory(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute CategoryPO categoryPO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.addCategory(categoryPO);
@@ -89,9 +96,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = "/updateCategory",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result updateCategory(HttpServletRequest request,HttpServletResponse response, @ModelAttribute CategoryPO categoryPO ) {
+
+	@RequestMapping(value = "/updateCategory", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result updateCategory(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute CategoryPO categoryPO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.updateCategory(categoryPO);
@@ -110,8 +118,9 @@ public class ManagementConroller extends BaseController{
 		return result;
 	}
 
-	@RequestMapping(value = "/deleteCategory", method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result deleteCategory(HttpServletRequest request,HttpServletResponse response,@RequestParam(name = "id") Integer id) {
+	@RequestMapping(value = "/deleteCategory", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result deleteCategory(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "id") Integer id) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.deleteCategory(id);
@@ -129,8 +138,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	@RequestMapping(value = "/deleteContent", method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result deleteContent(HttpServletRequest request,HttpServletResponse response,@RequestParam(name = "id") Integer id) {
+
+	@RequestMapping(value = "/deleteContent", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result deleteContent(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "id") Integer id) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.deleteContent(id);
@@ -148,10 +159,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	
-	@RequestMapping(value = "/addContent",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result addContent(HttpServletRequest request,HttpServletResponse response,@ModelAttribute ContentPO contentPO ) {
+
+	@RequestMapping(value = "/addContent", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result addContent(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute ContentPO contentPO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.addContent(contentPO);
@@ -169,9 +180,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = "/updateContent",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result updateContent(HttpServletRequest request,HttpServletResponse response, @ModelAttribute ContentPO contentPO ) {
+
+	@RequestMapping(value = "/updateContent", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result updateContent(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute ContentPO contentPO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.updateContent(contentPO);
@@ -189,9 +201,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = "/getContentList",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result getContentList(HttpServletRequest request,HttpServletResponse response, @RequestParam(name = "categoryId") Integer categoryId) {
+
+	@RequestMapping(value = "/getContentList", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result getContentList(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "categoryId") Integer categoryId) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			result.setData(managementService.getContentList(categoryId));
@@ -209,8 +222,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	@RequestMapping(value = "/deleteResource", method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result deleteResource(HttpServletRequest request,HttpServletResponse response,@RequestParam(name = "id") Integer id) {
+
+	@RequestMapping(value = "/deleteResource", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result deleteResource(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "id") Integer id) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.deleteResource(id);
@@ -228,10 +243,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	
-	@RequestMapping(value = "/addResource",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result addResource(HttpServletRequest request,HttpServletResponse response,@ModelAttribute ResourcePO resourcePO ) {
+
+	@RequestMapping(value = "/addResource", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result addResource(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute ResourcePO resourcePO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.addResource(resourcePO);
@@ -249,9 +264,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = "/updateResource",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result updateResource(HttpServletRequest request,HttpServletResponse response,@ModelAttribute ResourcePO resourcePO) {
+
+	@RequestMapping(value = "/updateResource", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result updateResource(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute ResourcePO resourcePO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			managementService.updateResource(resourcePO);
@@ -269,9 +285,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = "/getResourceList",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result getResourceList(HttpServletRequest request,HttpServletResponse response,@ModelAttribute ResourcePO resourcePO) {
+
+	@RequestMapping(value = "/getResourceList", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result getResourceList(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute ResourcePO resourcePO) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			result.setData(managementService.getResourceList(resourcePO));
@@ -290,9 +307,9 @@ public class ManagementConroller extends BaseController{
 		return result;
 	}
 
-
-	@RequestMapping(value = "/addTeam",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result addTeam(HttpServletRequest request,HttpServletResponse response,@ModelAttribute TeamPO team ) {
+	@RequestMapping(value = "/addTeam", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result addTeam(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute TeamPO team) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			teamService.insertTeam(team);
@@ -310,9 +327,10 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
-	@RequestMapping(value = "/updateTeam",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result updateTeam(HttpServletRequest request,HttpServletResponse response,@ModelAttribute TeamPO team ) {
+
+	@RequestMapping(value = "/updateTeam", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result updateTeam(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute TeamPO team) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
 			teamService.updateTeam(team);
@@ -330,13 +348,118 @@ public class ManagementConroller extends BaseController{
 		}
 		return result;
 	}
-	
 
-	@RequestMapping(value = "/getTeam",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result getTeam(HttpServletRequest request,HttpServletResponse response,@RequestParam(name = "id") int id) {
+	@RequestMapping(value = "/getTeam", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result getTeam(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "id") int id) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
-			teamService.getTeam(id);
+			result.setData(teamService.getTeam(id));
+		} catch (BusinessRuntimeException be) {
+			result.setCode(be.getCode());
+			result.setMessage(be.getMessage());
+			result.setSuccess(false);
+			LOG.info(be.getMessage(), be);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			result.setCode(CodeAndMsg.SYSTEM_EXCEPTION.getCode());
+			result.setMessage(CodeAndMsg.SYSTEM_EXCEPTION.getMsg());
+			result.setSuccess(false);
+			LOG.info(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/deleteTeam", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result deleteTeam(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "id") int id) {
+		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
+		try {
+			teamService.deleteTeam(id);
+		} catch (BusinessRuntimeException be) {
+			result.setCode(be.getCode());
+			result.setMessage(be.getMessage());
+			result.setSuccess(false);
+			LOG.info(be.getMessage(), be);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			result.setCode(CodeAndMsg.SYSTEM_EXCEPTION.getCode());
+			result.setMessage(CodeAndMsg.SYSTEM_EXCEPTION.getMsg());
+			result.setSuccess(false);
+			LOG.info(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/addPartner", method = { RequestMethod.POST, RequestMethod.GET })
+	public  Result addPartner(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute PartnerPO partner) {
+		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
+		try {
+			partnerService.add(partner);
+		} catch (BusinessRuntimeException be) {
+			result.setCode(be.getCode());
+			result.setMessage(be.getMessage());
+			result.setSuccess(false);
+			LOG.info(be.getMessage(), be);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			result.setCode(CodeAndMsg.SYSTEM_EXCEPTION.getCode());
+			result.setMessage(CodeAndMsg.SYSTEM_EXCEPTION.getMsg());
+			result.setSuccess(false);
+			LOG.info(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/updatePartner", method = { RequestMethod.POST, RequestMethod.GET })
+	public  Result updateTeam(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute PartnerPO partner) {
+		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
+		try {
+			partnerService.update(partner);
+		} catch (BusinessRuntimeException be) {
+			result.setCode(be.getCode());
+			result.setMessage(be.getMessage());
+			result.setSuccess(false);
+			LOG.info(be.getMessage(), be);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			result.setCode(CodeAndMsg.SYSTEM_EXCEPTION.getCode());
+			result.setMessage(CodeAndMsg.SYSTEM_EXCEPTION.getMsg());
+			result.setSuccess(false);
+			LOG.info(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/getPartner", method = { RequestMethod.POST, RequestMethod.GET })
+	public  Result getPartner(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "id") int id) {
+		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
+		try {
+			result.setData(partnerService.get(id));
+		} catch (BusinessRuntimeException be) {
+			result.setCode(be.getCode());
+			result.setMessage(be.getMessage());
+			result.setSuccess(false);
+			LOG.info(be.getMessage(), be);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			result.setCode(CodeAndMsg.SYSTEM_EXCEPTION.getCode());
+			result.setMessage(CodeAndMsg.SYSTEM_EXCEPTION.getMsg());
+			result.setSuccess(false);
+			LOG.info(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/deletePartner", method = { RequestMethod.POST, RequestMethod.GET })
+	public Result deletePartner(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name = "id") int id) {
+		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
+		try {
+			partnerService.delete(id);
 		} catch (BusinessRuntimeException be) {
 			result.setCode(be.getCode());
 			result.setMessage(be.getMessage());
@@ -352,11 +475,12 @@ public class ManagementConroller extends BaseController{
 		return result;
 	}
 	
-	@RequestMapping(value = "/deleteTeam",  method = {RequestMethod.POST, RequestMethod.GET})
-	public @ResponseBody Result deleteTeam(HttpServletRequest request,HttpServletResponse response,@RequestParam(name = "id") int id) {
+	@RequestMapping(value = "/searchResource", method = { RequestMethod.POST, RequestMethod.GET })
+	public @ResponseBody Result searchResource(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name="desc",defaultValue="")String desc,@RequestParam(name="type",defaultValue="0")int type) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
-			teamService.deleteTeam(id);
+			result.setData(managementService.getResourceList(desc,type));
 		} catch (BusinessRuntimeException be) {
 			result.setCode(be.getCode());
 			result.setMessage(be.getMessage());

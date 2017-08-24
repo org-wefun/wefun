@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import wefun.commons.Result;
 import wefun.commons.constant.CodeAndMsg;
 import wefun.commons.exception.BusinessRuntimeException;
+import wefun.service.PartnerService;
 import wefun.service.TeamService;
 import wefun.service.ViewService;
 
@@ -23,6 +24,8 @@ public class ViewController extends BaseController {
 	private ViewService viewService;
 	@Autowired
 	private TeamService teamService;
+	@Autowired
+	private PartnerService partnerService;
 
 	@RequestMapping(value = "/getBaseInfo", method = RequestMethod.GET)
 	public @ResponseBody Result getBaseInfo(HttpServletRequest request,HttpServletResponse response) {
@@ -105,11 +108,11 @@ public class ViewController extends BaseController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/getPartner", method = RequestMethod.GET)
-	public @ResponseBody Result getPartner(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(value = "/getPartnerList", method = RequestMethod.GET)
+	public @ResponseBody Result getPartnerList(HttpServletRequest request,HttpServletResponse response) {
 		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
 		try {
-			result.setData(viewService.getPartner());
+			result.setData(partnerService.getPartnerList());
 		} catch (BusinessRuntimeException be) {
 			result.setCode(be.getCode());
 			result.setMessage(be.getMessage());

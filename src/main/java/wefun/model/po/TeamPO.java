@@ -1,6 +1,5 @@
 package wefun.model.po;
 
-import java.util.Date;
 /**
  * 
  * @author dongyangyang
@@ -17,9 +16,24 @@ public class TeamPO extends BasePO{
 	private String photo;
 	private String label;
 	private int order;
-	private Date createTime;
-	private Date updateTime;
 	
+	private String desc;
+	
+	private String descDetail;
+	
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	
+	public String getDescDetail() {
+		return descDetail;
+	}
+	public void setDescDetail(String descDetail) {
+		this.descDetail = descDetail;
+	}
 	public int getId() {
 		return id;
 	}
@@ -61,18 +75,6 @@ public class TeamPO extends BasePO{
 	}
 	public void setLabel(String label) {
 		this.label = label;
-	}
-	public Date getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
 	}
 	public int getOrder() {
 		return order;

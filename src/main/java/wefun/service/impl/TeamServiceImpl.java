@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 
 import wefun.commons.constant.CodeAndMsg;
 import wefun.commons.exception.BusinessRuntimeException;
+import wefun.dao.mysql.InformationDAO;
 import wefun.dao.mysql.TeamDAO;
+import wefun.model.po.InformationPO;
 import wefun.model.po.TeamPO;
 import wefun.service.TeamService;
 @Service
 public class TeamServiceImpl extends BaseServiceImpl implements TeamService{
 	@Autowired
     private TeamDAO teamDAO;
+	@Autowired
+	private InformationDAO informationDAO;
 	@Override
 	public List<TeamPO> getTeamList() {
 		return teamDAO.list();
@@ -24,6 +28,11 @@ public class TeamServiceImpl extends BaseServiceImpl implements TeamService{
 		if(null == team ){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
+	    InformationPO info = informationDAO.get();
+	    if(null != info){
+	    	team.setQrCodeQQ(info.getQrCodeQQ());
+	    	team.setQrCodeWechat(info.getQrCodeWechat());
+	    }
 		return teamDAO.insert(team);
 	}
 
@@ -40,6 +49,11 @@ public class TeamServiceImpl extends BaseServiceImpl implements TeamService{
 		if(teamDB == null){
 			throw new BusinessRuntimeException(CodeAndMsg.CANNOT_FIND_IN_DATABASE);
 		}
+	    InformationPO info = informationDAO.get();
+	    if(null != info){
+	    	teamDB.setQrCodeQQ(info.getQrCodeQQ());
+	    	teamDB.setQrCodeWechat(info.getQrCodeWechat());
+	    }
 		teamDB.setDegree(team.getDegree());
 		teamDB.setLabel(team.getLabel());
 		teamDB.setName(team.getName());
@@ -47,6 +61,8 @@ public class TeamServiceImpl extends BaseServiceImpl implements TeamService{
 		teamDB.setQrCodeQQ(team.getQrCodeQQ());
 		teamDB.setQrCodeWechat(team.getQrCodeWechat());
 		teamDB.setOrder(team.getOrder());
+		teamDB.setDesc(team.getDesc());
+		teamDB.setDescDetail(team.getDescDetail());
 		teamDAO.update(teamDB);
 	}
 

@@ -6,7 +6,11 @@ import wefun.model.po.CategoryPO;
 import wefun.model.po.InformationPO;
 import wefun.model.po.ResourcePO;
 import wefun.model.vo.CategoryVO;
-
+/**
+ * 
+ * @author dongyangyang
+ *
+ */
 public interface ViewService {
 	/**
 	 * 获取首页轮播图
@@ -19,11 +23,6 @@ public interface ViewService {
 	 */
 	public CategoryVO getPartner();
 	
-	/**
-	 * 获取团队
-	 * @return
-	 */
-	public List<ResourcePO> getTeam();
 	/**
 	 * 获取基本信息
 	 * @return

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="wefun.dao.mysql.PartnerDAO">  
+     
+    <select id="list"  resultType="wefun.model.po.PartnerPO">  
+       SELECT * FROM partner 
+    </select>  
+    
+    <select id="get" parameterType="int" resultType="wefun.model.po.PartnerPO">  
+       SELECT * FROM partner WHERE id = #{id}
+    </select>
+    
+    <delete id="delete" parameterType="int">
+       DELETE FROM partner WHERE id = #{id}
+    </delete>
+    
+    <insert id="insert" parameterType="wefun.model.po.PartnerPO"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO partner
+		(`name`,`photo`,`label`,`order`,`createTime`,`updateTime`)
+		VALUES
+		(#{name},#{photo},#{label},#{order},now(),now())
+	</insert>
+    
+    <update id="update" parameterType="wefun.model.po.PartnerPO">
+        UPDATE partner
+        <set>
+			`name`          = #{name},
+			`photo`         = #{photo},
+			`label`         = #{label},
+			`order`         = #{order},
+			`updateTime`    = now()
+		</set>
+		WHERE id = #{id}
+    </update>
+</mapper> 
