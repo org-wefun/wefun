@@ -6,5 +6,6 @@ package wefun.service;
  *
  */
 public interface BaseService {
+
  
 }

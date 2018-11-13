@@ -9,5 +9,7 @@ public interface UserDAO {
 	 * @return
 	 */
 	public UserPO findByAccount(String account);
+	
+	void update(UserPO user);
 
 }

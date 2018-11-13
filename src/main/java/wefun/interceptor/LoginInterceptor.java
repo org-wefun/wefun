@@ -42,19 +42,20 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/json;utf-8");
-        if(this.checkNonLogin(request.getRequestURI(), nonLoginSet)){
-        	return true;
-        }
-		final String SESSION_ID = this.getSessionId(request);
-		LOG.info("session id is : "+SESSION_ID);
-		if (!StringUtils.hasText(SESSION_ID)) {
-			Result result = new Result(CodeAndMsg.NEED_LOGIN);
-			result.setSuccess(false);
-			response.getWriter().write(JSON.toJSONString(result));
-			return false;
-		}else{
-			return checkSession(SESSION_ID);
-		}
+		return  true;
+//        if(this.checkNonLogin(request.getRequestURI(), nonLoginSet)){
+//        	return true;
+//        }
+//		final String SESSION_ID = this.getSessionId(request);
+//		LOG.info("session id is : "+SESSION_ID);
+//		if (!StringUtils.hasText(SESSION_ID)) {
+//			Result result = new Result(CodeAndMsg.NEED_LOGIN);
+//			result.setSuccess(false);
+//			response.getWriter().write(JSON.toJSONString(result));
+//			return false;
+//		}else{
+//			return checkSession(SESSION_ID);
+//		}
 	}
 
 	private boolean checkNonLogin(String uri, Set<String> uris) {

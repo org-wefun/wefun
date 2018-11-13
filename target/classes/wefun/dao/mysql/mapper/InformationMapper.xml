@@ -28,7 +28,8 @@
 			qrCodeWechat = #{qrCodeWechat},
 			qrCodeQQ = #{qrCodeQQ},
 			slogan = #{slogan},
-			updateTime = now()
+			updateTime = now(),
+			aboutUs = #{aboutUs}
 		</set>
 		<where>
 			`id` = #{id}

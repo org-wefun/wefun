@@ -46,5 +46,25 @@ public class UserController extends BaseController{
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/modifyPwd", method = {RequestMethod.POST,RequestMethod.GET})
+	public  Result modifyPwd(HttpServletRequest request,HttpServletResponse response, @ModelAttribute UserPO userPO) {
+		Result result = new Result(CodeAndMsg.REQUEST_SUCCESS);
+		try {
+			userService.modifyPwd(userPO);
+		} catch (BusinessRuntimeException be) {
+			result.setCode(be.getCode());
+			result.setMessage(be.getMessage());
+			result.setSuccess(false);
+			LOG.info(be.getMessage(), be);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			result.setCode(CodeAndMsg.SYSTEM_EXCEPTION.getCode());
+			result.setMessage(CodeAndMsg.SYSTEM_EXCEPTION.getMsg());
+			result.setSuccess(false);
+			LOG.info(e.getMessage(), e);
+		}
+		return result;
+	}
 
 }

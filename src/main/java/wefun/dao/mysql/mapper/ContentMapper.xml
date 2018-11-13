@@ -13,9 +13,9 @@
 	<insert id="insert" parameterType="wefun.model.po.ContentPO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into content
-		(`categoryId`,`title`,`content`,`order`,`createTime`,`updateTime`)
+		(`categoryId`,`title`,`content`,`order`,`createTime`,`updateTime`,`encrypt`)
 		values
-		(#{categoryId},#{title},#{content},#{order},now(),now())
+		(#{categoryId},#{title},#{content},#{order},now(),now(),#{encrypt})
 	</insert>
 
 	<update id="update" parameterType="wefun.model.po.ContentPO">
@@ -25,7 +25,8 @@
 			`title` = #{title},
 			`content`= #{content},
 			`order` = #{order},
-			`updateTime` = now()
+			`updateTime` = now(),
+			`encrypt` =#{encrypt}
 		</set>
 		where id = #{id}
 	</update>

@@ -23,6 +23,8 @@ public class ResourcePO extends BasePO{
     private String desc;
     
     private String route;
+    // 是否是加密资源
+    private int encrypt;
     
 	public String getRoute() {
 		return route;
@@ -72,6 +74,10 @@ public class ResourcePO extends BasePO{
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-    
-    
+	public int getEncrypt() {
+		return encrypt;
+	}
+	public void setEncrypt(int encrypt) {
+		this.encrypt = encrypt;
+	}
 }

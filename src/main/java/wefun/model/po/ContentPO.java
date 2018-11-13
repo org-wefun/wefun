@@ -16,6 +16,9 @@ public class ContentPO extends BasePO{
 	
 	private Integer order;
 	
+    // 时候是加密资源
+    private int encrypt;
+    
 	public Integer getId() {
 		return id;
 	}
@@ -46,7 +49,11 @@ public class ContentPO extends BasePO{
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
-
-	
+	public int getEncrypt() {
+		return encrypt;
+	}
+	public void setEncrypt(int encrypt) {
+		this.encrypt = encrypt;
+	}
  
 }

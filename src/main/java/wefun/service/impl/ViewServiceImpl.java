@@ -106,9 +106,11 @@ public class ViewServiceImpl extends BaseServiceImpl implements ViewService{
 				contentVO.setContent(content.getContent());
 				contentVO.setTitle(content.getTitle());
 				contentVO.setOrder(content.getOrder());
+				contentVO.setEncrypt(content.getEncrypt());
 				ResourcePO resourcePO = new ResourcePO();
 				resourcePO.setContentId(contentId);
 				contentVO.setResourceList(resourceDAO.getResourceList(resourcePO));
+				
 				resultList.add(contentVO);
 			}
 		}

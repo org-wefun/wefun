@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wefun.dao.mysql.InviteCodeDAO">
+
+	<insert id="insert" parameterType="wefun.model.po.InviteCode">
+		INSERT INTO invite_code (code,expire,createTime,updateTime)values(#{code},#{expire},now(),now())
+	</insert>
+
+	<update id="update" parameterType="wefun.model.po.InviteCode">
+		UPDATE invite_code
+		SET expire = #{expire},
+		SET updateTime=now()
+		WHERE code = #{code}
+	</update>
+
+	<select id="getList" resultType="wefun.model.po.InviteCode">
+		select * from invite_code order by updateTime
+	</select>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from invite_code where code = #{code}
+	</delete>
+	
+	<select id="get" parameterType="java.lang.String" resultType="wefun.model.po.InviteCode">
+		select * from invite_code where code =#{code}
+	</select>
+
+</mapper> 

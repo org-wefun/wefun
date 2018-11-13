@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
-
 import wefun.commons.constant.CodeAndMsg;
 import wefun.commons.exception.BusinessRuntimeException;
 import wefun.dao.mysql.CategoryDAO;
@@ -41,7 +39,6 @@ public class ManagementServiceImpl implements ManagementService{
 		if(null == categoryPO){
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
-		System.out.println(JSON.toJSONString(categoryPO));
 		gategoryDAO.insert(categoryPO);
 		
 	}

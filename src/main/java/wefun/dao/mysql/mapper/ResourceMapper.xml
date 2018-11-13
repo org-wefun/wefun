@@ -21,9 +21,9 @@
 	<insert id="insert" parameterType="wefun.model.po.ResourcePO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into resource
-		(`url`,`type`,`desc`,`order`,`categoryId`,`contentId`,`createTime`,`updateTime`,`route`)
+		(`url`,`type`,`desc`,`order`,`categoryId`,`contentId`,`createTime`,`updateTime`,`route`,`encrypt`)
 		values
-		(#{url},#{type},#{desc},#{order},#{categoryId},#{contentId},now(),now(),#{route})
+		(#{url},#{type},#{desc},#{order},#{categoryId},#{contentId},now(),now(),#{route},#{encrypt})
 	</insert>
     
 	<update id="update" parameterType="wefun.model.po.ResourcePO">
@@ -36,7 +36,8 @@
 			`contentId` = #{contentId},
 			`desc` = #{desc},
 			`route` =#{route},
-			`updateTime` = now()
+			`updateTime` = now(),
+			`encrypt` = #{encrypt}
 		</set>
 		where `id` = #{id}
 	</update>

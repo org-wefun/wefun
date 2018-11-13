@@ -10,6 +10,8 @@ public class ContentVO {
 	private int order;
 	private List<ResourcePO> resourceList;
 	private String content;
+    // 时候是加密资源
+    private int encrypt;
 	public String getTitle() {
 		return title;
 	}
@@ -40,6 +42,10 @@ public class ContentVO {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	
-
+	public int getEncrypt() {
+		return encrypt;
+	}
+	public void setEncrypt(int encrypt) {
+		this.encrypt = encrypt;
+	}
 }

@@ -9,13 +9,13 @@
 		parameterType="wefun.model.po.CategoryPO">
 		SELECT * FROM category
 		<where>
-			<if test="parentId != null">
+			<if test="parentId != null and parentId !=0">
 				parentId = #{parentId}
 			</if>
-			<if test="type != null">
+			<if test="type != null and type !=0">
 				AND type = #{type}
 			</if>
-			<if test="level != null">
+			<if test="level != null and level !=0">
 				AND level = #{level}
 			</if>
 		</where>
@@ -25,13 +25,13 @@
 		parameterType="wefun.model.po.CategoryPO">
 		SELECT * FROM category
 		<where>
-			<if test="parentId != null">
+			<if test="parentId != null and parentId != 0">
 				parentId = #{parentId}
 			</if>
-			<if test="type != null">
+			<if test="type != null and type !=0">
 				AND type = #{type}
 			</if>
-			<if test="level != null">
+			<if test="level != null and level != 0">
 				AND level = #{level}
 			</if>
 			<if test="id != null">
@@ -43,9 +43,9 @@
 	<insert id="insert" parameterType="wefun.model.po.CategoryPO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into category
-		(`name`,`level`,`parentId`,`type`,`order`,`createTime`,`updateTime`)
+		(`name`,`level`,`parentId`,`type`,`order`,`createTime`,`updateTime`,`show`,`image`,`enName`,`hoverImage`,`content`)
 		values
-		(#{name},#{level},#{parentId},#{type},#{order},now(),now())
+		(#{name},#{level},#{parentId},#{type},#{order},now(),now(),#{show},#{image},#{enName},#{hoverImage},#{content})
 	</insert>
 
 	<update id="update" parameterType="wefun.model.po.CategoryPO">
@@ -56,12 +56,17 @@
 			`parentId`= #{parentId},
 			`type` = #{type},
 			`order` = #{order},
-			`updateTime` = now()
+			`updateTime` = now(),
+			`show` = #{show},
+			`image` = #{image},
+			`hoverImage` =#{hoverImage},
+			`enName`  = #{enName},
+			`content` = #{content}
 		</set>
 		where `id` = #{id}
 	</update>
-	
-    <delete id="delete" parameterType="java.lang.Integer">
-    	delete from category where id = #{id}
-    </delete>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from category where id = #{id}
+	</delete>
 </mapper> 

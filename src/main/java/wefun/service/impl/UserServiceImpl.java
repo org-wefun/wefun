@@ -9,47 +9,79 @@ import org.springframework.util.StringUtils;
 import wefun.commons.constant.CodeAndMsg;
 import wefun.commons.exception.BusinessRuntimeException;
 import wefun.commons.util.MD5Utils;
+import wefun.commons.util.ThreadLocalUtils;
 import wefun.dao.mysql.UserDAO;
 import wefun.model.po.UserPO;
 import wefun.service.CacheService;
 import wefun.service.UserService;
+
 @Service
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	@Autowired
-    private UserDAO userDAO;
+	private UserDAO userDAO;
 	@Autowired
 	private CacheService cacheService;
+
 	@Override
 	public UserPO getUser(String account) {
-		if(!StringUtils.hasText(account)){
+		if (!StringUtils.hasText(account)) {
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
 		UserPO userPO = userDAO.findByAccount(account);
 		return userPO;
 	}
-	
+
 	@Override
-	public String login(UserPO userPO) {
-		if(null == userPO){
-			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
-		} 
-		final String account = userPO.getAccount().trim();
-		final String password = userPO.getPassword().trim();
-		if(!StringUtils.hasText(account)){
+	public void modifyPwd(UserPO userPO) {
+		if (null == userPO) {
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
-		if(!StringUtils.hasText(password)){
+		if(!StringUtils.hasText(userPO.getPassword())){
+			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
+		}
+		String acc = this.getLocalUserAcc();
+		UserPO userDB = userDAO.findByAccount(acc);
+		if (null != userDB) {
+			userDB.setPassword(MD5Utils.MD5(userPO.getPassword()));
+			userDAO.update(userDB);
+		}
+	}
+
+	private String getLocalUserAcc() {
+		Object userObj = ThreadLocalUtils.getObject(ThreadLocalUtils.USER_KEY);
+		UserPO user = null;
+		String result = "";
+		if (null != userObj) {
+			user = (UserPO) userObj;
+			result = user.getAccount();
+		} else {
+			result = "guoruyafeng";
+		}
+		return result;
+	}
+
+	@Override
+	public String login(UserPO userPO) {
+		if (null == userPO) {
+			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
+		}
+		final String account = userPO.getAccount().trim();
+		final String password = userPO.getPassword().trim();
+		if (!StringUtils.hasText(account)) {
+			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
+		}
+		if (!StringUtils.hasText(password)) {
 			throw new BusinessRuntimeException(CodeAndMsg.PARAM_NOT_NULL);
 		}
 		UserPO userPODB = userDAO.findByAccount(account);
-		if(null == userPODB){
+		if (null == userPODB) {
 			throw new BusinessRuntimeException(CodeAndMsg.INVALID_ACCOUNT);
 		}
 		final String password_DB = userPODB.getPassword();
-		if(!Objects.equals(password, password_DB)){
+		if (!Objects.equals(password, password_DB)) {
 			throw new BusinessRuntimeException(CodeAndMsg.PASSWORD_ACCOUNT_ERROR);
 		}
-		//写入缓存
+		// 写入缓存
 		final String key = MD5Utils.MD5(account);
 		cacheService.set(key, userPODB);
 		return key;
